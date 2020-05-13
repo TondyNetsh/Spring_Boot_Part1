@@ -1,25 +1,30 @@
+import com.Springboot.User;
 import org.springframework.stereotype.Repository;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
 @Repository
-public abstract class FakeRepo <User> implements FakeRepoInterface{
-    ArrayList<User> user = new ArrayList<>();
-    Scanner sc = new Scanner(System.in);
+public abstract class FakeRepo implements FakeRepoInterface <User>{
+    private Map<Integer, User> repository;
 
-    @Override
-    public void insertUser(String name, String surname){
-        user.add((User) name);
-        user.add((User) surname);
+    public FakeRepo() {
+        this.repository = new HashMap<>();
     }
 
     @Override
-    public String findUserById(long Id){
-        return null;
+    public User deleteUser(long id) {
+        User e = repository.get(id);
+        this.repository.remove(id);
+        return e;
     }
 
     @Override
-    public void deleteUser(long Id){
+    public User insertUser(User user) {
+        return repository.put((int) user.getId(),user);
+    }
 
+    @Override
+    public User findUserById(long id) {
+        return repository.get(id);
     }
 }

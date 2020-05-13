@@ -1,11 +1,9 @@
-public abstract interface FakeRepoInterface {
-    public void insertUser(String name, String surname);
-    public String findUserById(long Id);
-    public void deleteUser(long Id);
+import com.Springboot.User;
+public abstract interface FakeRepoInterface <T>{
+    public T insertUser(User user);
 
-    void addUser(User user)
+    Object insertUser(Object user);
 
-    void removeUser(long id);
-
-    void getUser(long id);
+    public T findUserById(long id);
+    public T deleteUser(long id);
 }
